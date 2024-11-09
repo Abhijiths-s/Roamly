@@ -76,7 +76,7 @@ const BlogProfilePage = ({ showAlert }) => {
   };
 
   return (
-    <div className="bg-cyan-300 flex flex-col justify-center items-center -z-10">
+    <div className="bg-cyan-300 flex flex-col justify-center items-center -z-10 w-full">
       <Link to="/dashboard">
         <button className=" absolute top-4 left-4 bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition duration-300">
           <svg
@@ -98,32 +98,32 @@ const BlogProfilePage = ({ showAlert }) => {
       </Link>
 
       {user && (
-        <div className="flex items-center justify-center space-x-4  mt-10 mb-4 bg-cyan-200 rounded-lg shadow-md p-8 max-w-7xl mx-auto">
+        <div className="space-x-4  mt-20 mb-4 bg-cyan-200 rounded-lg shadow-md p-8 max-w-7xl mx-auto px-6 ">
           {/* <img
               src={user.profilePicture || "/default-avatar.jpg"} // Fallback to a default avatar if not available
               alt={user.username}
               className="w-16 h-16 rounded-full"
             /> */}
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-3">
+          <div className="flex flex-col items-center justify-center mx-auto">
+            <h2 className="text-3xl font-bold text-gray-800 text-center mb-3 ">
               {user.username}
             </h2>
             <p className="text-gray-600">{user.email}</p>
           </div>
         </div>
       )}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 shadow-md bg-cyan-200 py-10 mb-6">
+      <div className="mx-auto lg:max-w-5xl max-w-7xl px-6 lg:px-8  bg-transparent py-10 mb-6 rounded-lg">
         <div className="flex flex-col items-center justify-center mb-6 ">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          <h2 className="md:text-5xl text-4xl font-bold text-black ">
             My Blog Posts
           </h2>
         </div>
-        <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 gap-x-20 lg:gap-y-24  ">
+        <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-1 gap-x-20 lg:gap-y-24 ">
           {blogs.length > 0 ? (
             blogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-white rounded-lg shadow-sm p-4 flex justify-between items-center relative "
+                className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center relative "
               >
                 <div className="my-10">
                   {blog.image && (
@@ -133,10 +133,10 @@ const BlogProfilePage = ({ showAlert }) => {
                       className="w-full  object-cover rounded-md mb-4"
                     />
                   )}
-                  <h4 className="text-lg font-medium text-gray-800 mb-2">
+                  <h4 className="text-2xl font-semibold text-gray-800 mb-8">
                     {blog.title}
                   </h4>
-                  <p className="text-gray-600 mb-2">{blog.content}</p>
+                  <p className="text-gray-600 mb-2 text-lg leading-tight">{blog.content}</p>
                   <p className="text-gray-900 text-sm">
                     {new Date(blog.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -145,7 +145,7 @@ const BlogProfilePage = ({ showAlert }) => {
                     })}
                   </p>
                 </div>
-                <div className="absolute top-2 right-2">
+                <div className="absolute top-5 right-4">
                   <button
                     className="text-gray-500 hover:text-gray-700 focus:outline-none"
                     onClick={() => handleMenuToggle(blog._id)}

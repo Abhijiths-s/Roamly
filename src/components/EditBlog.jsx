@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function EditBlog({ blogs, setBlogs ,showAlert}) {
+export default function EditBlog({ blogs, setBlogs, showAlert }) {
   const { id } = useParams(); // Get blog ID from URL
   const navigate = useNavigate(); // For redirecting after edit
   const blogToEdit = blogs.find((blog) => blog._id === id);
@@ -37,8 +37,8 @@ export default function EditBlog({ blogs, setBlogs ,showAlert}) {
         console.log(`Updated blog post with ID: ${id}`);
         showAlert("Post updated successfully!", "success");
         setTitle("");
-        setContent("")// Redirect to dashboard after update
-        navigate("/profile"); 
+        setContent(""); // Redirect to dashboard after update
+        navigate("/profile");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error updating blog");
@@ -50,55 +50,63 @@ export default function EditBlog({ blogs, setBlogs ,showAlert}) {
     }
   };
 
-//   if (errorMessage) {
-//     return (
-//       <div className="edit-blog-container">
-//         <h2 className="text-3xl font-bold mb-4">Edit Blog Post</h2>
-//         <p className="text-red-500">{errorMessage}</p>
-//       </div>
-//     );
-//   }
+  //   if (errorMessage) {
+  //     return (
+  //       <div className="edit-blog-container">
+  //         <h2 className="text-3xl font-bold mb-4">Edit Blog Post</h2>
+  //         <p className="text-red-500">{errorMessage}</p>
+  //       </div>
+  //     );
+  //   }
 
   return (
-    <div className="container flex flex-col justify-center  ">
-      <h2 className="text-3xl font-bold mb-4">Edit Blog Post</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleUpdateBlog();
-        }}
-        className="flex flex-col gap-4"
-      >
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-orange-500"
-          placeholder="Title"
-          required
-        />
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows="6"
-          className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-orange-500"
-          placeholder="Content"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-        >
-          Save Changes
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate("/dashboard")}
-          className="bg-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-500 transition duration-300 mt-2"
-        >
-          Cancel
-        </button>
-      </form>
+    <div className="flex flex-col justify-center items-center border-2 border-black min-h-screen">
+      <div className="shadow-md rounded-lg border-2 border-red-100 py-9 px-20 w-full max-w-md lg:max-w-4xl">
+        <div>
+          <h2 className="text-3xl font-bold mb-6 text-orange-500 text-center">
+            Edit Blog Post
+          </h2>
+        </div>
+        <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleUpdateBlog();
+            }}
+            className="flex flex-col gap-8 items-center"
+          >
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="p-3 rounded-md border border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 w-full"
+              placeholder="Title"
+              required
+            />
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              rows="8"
+              className="p-3 rounded-md border border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 w-full"
+              placeholder="Content"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-transparent border-green-500 border-2 text-black py-2 px-4 rounded-md hover:bg-green-500 hover:text-white  transition duration-300 font-semibold font-mono md:w-1/2 w-full mt-8"
+            >
+              Save Changes
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/profile")}
+              className="bg-transparent border-red-700 border-2 text-black py-2 px-4 rounded-md hover:bg-red-700 transition duration-300 mt-2 font-semibold hover:text-white font-mono md:w-1/2 w-full"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import BlogProfilePage from "./components/Blogprofile";
 import EditBlog from "./components/EditBlog";
 import Alert from "./components/Alert";
 import { AnimatePresence, motion } from "framer-motion";
+import Footer from "./components/Footer";
 
 // Main App Component
 export default function App() {
@@ -88,6 +89,7 @@ function LocationWrapper({ showAlert, blogs, setBlogs, fetchBlogs }) {
               >
                 <Hero />
                 <Blog blogs={blogs} />
+                <Footer />
               </motion.div>
             }
           />

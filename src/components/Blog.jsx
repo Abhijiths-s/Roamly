@@ -34,7 +34,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="bg-[#F9F9F9] py-24 sm:py-32">
+    <div className="bg-[#F9F9F9] py-24 sm:py-32 min-h-screen">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-[#333333] sm:text-4xl">
@@ -47,7 +47,7 @@ export default function Blog() {
 
         {/* Blog Posts */}
         <ScrollReveal delay={0.5} y={-80}>
-          <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 gap-x-20 lg:gap-y-24 max-h-20">
+          <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 gap-x-20 lg:gap-y-24 ">
             {blogs.length > 0 ? (
               blogs.map((blog) => (
                 <div key={blog._id} className="flex flex-col bg-white p-8 shadow-md rounded-md">
