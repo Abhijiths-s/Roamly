@@ -1,0 +1,37 @@
+.animated-text {
+    display: inline-block; /* Allow width to be animated */
+    width: 0; /* Start with width 0 */
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text wrapping */
+    animation: appear 1s forwards; /* Animation settings */
+  }
+  
+  @keyframes appear {
+    from {
+      width: 0; /* Start from width 0 */
+    }
+    to {
+      width: 100%; /* Expand to full width */
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  
+  .blurred-background {
+    filter: blur(2px);
+  }
+  

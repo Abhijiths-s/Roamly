@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Mansalva-regular';
+    src: url("./assets/fonts/Mansalva-Regular.ttf") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
