@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import sideimg from "../assets/point-view-shot-narrow-suspension-bridge-thick-beautiful-forest.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Registration({showAlert}) {
+export default function Registration({ showAlert }) {
   const [username, setUsername] = useState(""); // Changed from 'name' to 'username'
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isPasswordHidden, setPasswordHidden] = useState(true);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,9 +27,8 @@ export default function Registration({showAlert}) {
       if (response.ok) {
         setSuccess("Registration successful");
         setError("");
-        showAlert("Account created successfully","Success");
+        showAlert("Account created successfully", "Success");
         navigate("/login");
-        
       } else {
         const err = await response.json();
         setError(err.message || "Registration failed.");
@@ -74,6 +74,15 @@ export default function Registration({showAlert}) {
       </div>
 
       <div className="flex-1 flex items-center justify-center h-screen bg-gray-100 shadow-inner">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            backgroundImage: `url(${sideimg})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-5 sm:py-7 py-5 rounded-2xl shadow-md shadow-gray-400 z-10 hover:scale-105 transition-all ease-in duration-300">
           {/* <img
               src="../assets/Roamly-logo (1).png"

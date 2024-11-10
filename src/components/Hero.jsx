@@ -22,7 +22,7 @@ export default function Hero() {
             backgroundAttachment: "fixed",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t via-slate-900 from-black to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t via-slate-900 from-black to-transparent via-70% opacity-60" />
         <div className="flex flex-col items-center justify-center h-full text-center">
           <p className="text-4xl font-mansalva text-white px-4 fade-in mb-4">
             <span className="text-orange-500 font-masalva font-bold md:text-8xl text-5xl">
@@ -38,12 +38,12 @@ export default function Hero() {
             </span>
             .
           </p>
-          <button className=" bg-orange-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-orange-600 hover:scale-105 transition-all duration-300 shadow-md animate-bounce hover:shadow-lg  md:block hidden">
+          <button className=" bg-blue-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md animate-bounce hover:shadow-lg ">
             <Link to="/create">Start your journey</Link>
           </button>
-          <button className="mt-6 bg-orange-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-orange-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg z-10 animate-bounce md:hidden block">
+          {/* <button className="mt-6 bg-blue-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg z-10 animate-bounce md:hidden block">
             <Link to="/create">Start Your Journey</Link>
-          </button>
+          </button> */}
         </div>
       </div>
       

@@ -9,9 +9,11 @@ const BlogProfilePage = ({ showAlert }) => {
   // Fetch blogs created by the logged-in user
   useEffect(() => {
     const fetchUserBlogs = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       try {
-        const token = localStorage.getItem("token"); // Get token from localStorage or any storage method you use
-        const userResponse = await fetch("http://localhost:5000/api/user/me", {
+        const token = localStorage.getItem("token");
+         // Get token from localStorage or any storage method you use
+        const userResponse = await fetch(`${apiUrl}/user/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -25,7 +27,7 @@ const BlogProfilePage = ({ showAlert }) => {
           console.error("Error fetching user details:", errorData.message);
         }
 
-        const response = await fetch("http://localhost:5000/api/blogs/user", {
+        const response = await fetch(`${apiUrl}/blogs/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -48,9 +50,10 @@ const BlogProfilePage = ({ showAlert }) => {
 
   // Handle delete blog
   const handleDeleteBlog = async (id) => {
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
+      const response = await fetch(`${apiUrl}/blogs/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -76,9 +79,9 @@ const BlogProfilePage = ({ showAlert }) => {
   };
 
   return (
-    <div className="bg-cyan-300 flex flex-col justify-center items-center -z-10 w-full">
+    <div className="bg-black flex flex-col justify-center items-center -z-10 w-full">
       <Link to="/dashboard">
-        <button className=" absolute top-4 left-4 bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition duration-300">
+        <button className=" absolute top-4 left-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
@@ -98,23 +101,18 @@ const BlogProfilePage = ({ showAlert }) => {
       </Link>
 
       {user && (
-        <div className="space-x-4  mt-20 mb-4 bg-cyan-200 rounded-lg shadow-md p-8 max-w-7xl mx-auto px-6 ">
-          {/* <img
-              src={user.profilePicture || "/default-avatar.jpg"} // Fallback to a default avatar if not available
-              alt={user.username}
-              className="w-16 h-16 rounded-full"
-            /> */}
+        <div className="space-x-4  mt-20 mb-4 bg-gray-900 rounded-lg shadow-md p-8 max-w-7xl mx-auto px-6 font-roboto">
           <div className="flex flex-col items-center justify-center mx-auto">
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-3 ">
+            <h2 className="text-3xl font-bold text-gray-200 text-center mb-3 ">
               {user.username}
             </h2>
-            <p className="text-gray-600">{user.email}</p>
+            <p className="text-gray-300">{user.email}</p>
           </div>
         </div>
       )}
       <div className="mx-auto lg:max-w-5xl max-w-7xl px-6 lg:px-8  bg-transparent py-10 mb-6 rounded-lg">
-        <div className="flex flex-col items-center justify-center mb-6 ">
-          <h2 className="md:text-5xl text-4xl font-bold text-black ">
+        <div className="flex flex-col items-center justify-center mb-6 p-6 rounded-xl border-2">
+          <h2 className="md:text-5xl text-4xl font-bold text-white ">
             My Blog Posts
           </h2>
         </div>
@@ -123,7 +121,7 @@ const BlogProfilePage = ({ showAlert }) => {
             blogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-white rounded-lg shadow-md p-4 flex justify-between items-center relative "
+                className="bg-black border-2 rounded-lg shadow-md p-5 flex justify-between items-center relative "
               >
                 <div className="my-10">
                   {blog.image && (
@@ -133,11 +131,11 @@ const BlogProfilePage = ({ showAlert }) => {
                       className="w-full  object-cover rounded-md mb-4"
                     />
                   )}
-                  <h4 className="text-2xl font-semibold text-gray-800 mb-8">
+                  <h4 className="text-2xl font-semibold text-gray-200 font-roboto mb-8">
                     {blog.title}
                   </h4>
-                  <p className="text-gray-600 mb-2 text-lg leading-tight">{blog.content}</p>
-                  <p className="text-gray-900 text-sm">
+                  <p className="text-gray-200 font-roboto mb-2 text-lg ">{blog.content}</p>
+                  <p className="text-blue-400 text-sm mt-4">
                     {new Date(blog.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -151,7 +149,7 @@ const BlogProfilePage = ({ showAlert }) => {
                     onClick={() => handleMenuToggle(blog._id)}
                   >
                     <svg
-                      className="w-6 h-6 text-gray-800 "
+                      className="w-6 h-6 text-gray-100 "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -172,9 +170,7 @@ const BlogProfilePage = ({ showAlert }) => {
                       <Link to={`/edit/${blog._id}`} state={{ blogs }}>
                         <button
                           className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full"
-                          // onClick={() =>
-                          //   handleUpdateBlog(blog._id, { title: "Updated Title" })
-                          // }
+                        
                         >
                           <svg
                             className="w-6 h-6 mr-4 text-gray-800 "
@@ -225,7 +221,7 @@ const BlogProfilePage = ({ showAlert }) => {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500">
+            <p className="text-center text-gray-100">
               No blog posts available.
             </p>
           )}

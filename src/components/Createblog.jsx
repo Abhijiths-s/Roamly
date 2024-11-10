@@ -34,6 +34,7 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     if (title && content && author && image) {
       const formData = new FormData();
       formData.append("title", title);
@@ -43,7 +44,7 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
 
       try {
         const token = localStorage.getItem("token"); // Ensure the token is correctly stored
-        const response = await fetch("http://localhost:5000/api/blogs/create", {
+        const response = await fetch(`${apiUrl}/blogs/create`, {
           method: "POST",
           body: formData,
           headers: {
@@ -79,18 +80,11 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
   // }
 
   return (
-    <div className="flex w-screen h-screen relative items-center justify-center">
+    <div className="flex w-screen h-screen relative items-center justify-center bg-black">
      
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(102, 178, 255, 0.3) 0%, rgba(135, 206, 235, 0.2) 50%, rgba(255, 183, 77, 0) 100%)",
-          filter: "blur(118px)",
-        }}
-      ></div>
+    
       <Link to="/dashboard">
-        <button className=" absolute top-4 left-4 bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition duration-300">
+        <button className=" absolute top-4 left-4 bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition duration-300">
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
@@ -108,8 +102,8 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
           </svg>
         </button>
       </Link>
-      <div className="bg-white p-6 rounded-lg shadow-md md:w-1/2 w-full z-10 mx-5 md:mx-0">
-        <h2 className="text-4xl text-center font-semibold text-gray-800 mb-8">
+      <div className="bg-black border-2 p-6 rounded-xl shadow-md md:w-1/2 w-full z-10 mx-5 md:mx-0">
+        <h2 className="text-4xl text-center font-semibold text-gray-200 mb-8">
           Create a New Blog Post
         </h2>
         {errorMessage && (
@@ -121,7 +115,7 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             required
           />
 
@@ -130,12 +124,14 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows="4"
-            className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             required
           />
-
+          <label htmlFor="Author" className="text-gray-100 text-lg -mb-5 ml-2">
+            Author</label>
           <input
             type="text"
+            id="Author"
             placeholder="Author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)} // This line can be omitted if author is set automatically
@@ -153,7 +149,7 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
 
             <label
               htmlFor="file-upload"
-              className="bg-orange-600 text-white py-2 px-4 rounded-lg cursor-pointer hover:bg-orange-700 transition duration-300"
+              className="bg-yellow-500 text-white py-2 px-4 rounded-lg cursor-pointer hover:bg-yellow-700 transition duration-300"
             >
               Choose File
             </label>
@@ -165,12 +161,12 @@ export default function CreateBlog({ onSubmit ,showAlert}) {
 
           <button
             type="submit"
-            className={`bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition duration-300 ${
-              !(title && content && author && image)
+            className={`bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition duration-300 ${
+              !(title && content && author)
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
-            disabled={!(title && content && author && image)}
+            disabled={!(title && content && author)}
           >
             Post Blog
           </button>

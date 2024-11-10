@@ -2,7 +2,7 @@ import { useState } from "react";
 import bgimage from "../assets/person-traveling-enjoying-their-vacation.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = ( {showAlert} ) => {
+const Login = ({ showAlert }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,11 +12,13 @@ const Login = ( {showAlert} ) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    console.log("API URL:", apiUrl);
     setError(""); // Clear previous error
     setSuccess(""); // Clear previous success message
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,10 +31,10 @@ const Login = ( {showAlert} ) => {
         localStorage.setItem("token", data.token); // Store the token
         localStorage.setItem("username", data.username); // Store the username
         console.log("Login successful:", data);
-        setSuccess("Login successful"); 
+        setSuccess("Login successful");
         // Success message
-        showAlert("Logged in Successfully","success")// Redirect after successful login
-        navigate("/dashboard"); 
+        showAlert("Logged in Successfully", "success"); // Redirect after successful login
+        navigate("/dashboard");
       } else {
         const err = await response.json();
         setError(err.message || "Login failed.");
@@ -46,6 +48,15 @@ const Login = ( {showAlert} ) => {
   return (
     <main className="w-full flex">
       <div className="flex-1 flex items-center justify-center h-screen bg-gray-100 shadow-inner shadow-black">
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            backgroundImage: `url(${bgimage})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-5 sm:py-5 py-6 rounded-2xl shadow-gray-400 shadow-md z-10 hover:scale-105 transition-all ease-in duration-300">
           <div>
             <div className="mt-5 space-y-2 ">

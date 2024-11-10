@@ -65,13 +65,13 @@ export default function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
           isAtTop ? "top-0" : ""
-        } drop-shadow-xl shadow-md px-8 backdrop-blur-sm `}
+        } drop-shadow-xl shadow-md px-8 lg:backdrop-blur-sm `}
       >
-        <div className="flex items-center justify-between space-x-96 mx-auto py-4 ">
+        <div className="flex items-center justify-between mx-auto py-4 ">
           <Link to="/profile">
             <p className="flex flex-row justify-center items-center hover:underline underline-offset-2 text-white">
               <svg
-                className="w-6 h-6 mr-2  text-orange-500"
+                className="w-6 h-6 mr-2  text-blue-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 // width="24"
@@ -116,7 +116,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className=" bg-orange-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-orange-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg  md:block hidden"
+            className=" bg-blue-500 backdrop-blur-md text-white py-2 px-3 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg  md:block hidden"
             onClick={handleLogout}
           >
             Log out
@@ -149,37 +149,37 @@ export default function Navbar() {
         <div
           className={`${
             !state ? "hidden" : "block"
-          } flex justify-center items-center`}
+          } flex justify-center items-center border-2 rounded-xl  backdrop-blur-sm drop-shadow-xl`}
           id="mobile-menu"
         >
-          <ul className="space-y-6 text-center p-4 bg-transparent text-xl font-extrabold font-masalva ">
+          <ul className="space-y-6 text-center p-4 bg-transparent text-2xl font-extrabold font-roboto  ">
             <li
               onClick={changeState}
-              className="hover:bg-white hover:text-[black] rounded-lg  w-96 border-b-2 border-black"
-            >
-              <a href="/dashboard" className="text-black ">
+              className="text-black hover:text-white   w-96 "
+              >
+              <a href="/dashboard" className=" ">
                 Home
               </a>
             </li>
             <li
               onClick={changeState}
-              className="hover:bg-white hover:text-[black] rounded-lg  border-b-2 border-black"
+              className="text-black hover:text-white  "
             >
-              <a href="/about" className="text-black ">
+              <a href="/about" className=" ">
                 About
               </a>
             </li>
             <li
               onClick={changeState}
-              className="hover:bg-white hover:text-[black] rounded-lg  border-b-2 border-black"
+              className="text-black hover:text-white   "
             >
-              <a href="/contact" className="text-black">
+              <a href="/contact" className="">
                 Contact
               </a>
             </li>
             <li>
               <button
-                className=" bg-orange-500 backdrop-blur-md text-white py-1 px-4 rounded-lg text-sm hover:bg-orange-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg  "
+                className=" bg-blue-500 backdrop-blur-md text-white py-1 px-4 rounded-lg text-sm hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg  "
                 onClick={handleLogout}
               >
                 Log out

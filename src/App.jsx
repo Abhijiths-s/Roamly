@@ -24,8 +24,9 @@ export default function App() {
 
   // Function to fetch all blogs
   const fetchBlogs = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     try {
-      const response = await fetch("http://localhost:5000/api/blogs");
+      const response = await fetch(`${apiUrl}/blogs`);
       if (response.ok) {
         const data = await response.json();
         setBlogs(data);

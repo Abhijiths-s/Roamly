@@ -18,9 +18,10 @@ export default function EditBlog({ blogs, setBlogs, showAlert }) {
 
   const handleUpdateBlog = async () => {
     const updatedData = { title, content };
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
+      const response = await fetch(`${apiUrl}/blogs/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -60,8 +61,8 @@ export default function EditBlog({ blogs, setBlogs, showAlert }) {
   //   }
 
   return (
-    <div className="flex flex-col justify-center items-center border-2 border-black min-h-screen">
-      <div className="shadow-md rounded-lg border-2 border-red-100 py-9 px-20 w-full max-w-md lg:max-w-4xl">
+    <div className="flex flex-col justify-center items-center border-2 border-black min-h-screen bg-black">
+      <div className="shadow-md shadow-orange-300 rounded-lg border-2 border-red-100 py-9 px-10 w-full max-w-md lg:max-w-4xl bg-white">
         <div>
           <h2 className="text-3xl font-bold mb-6 text-orange-500 text-center">
             Edit Blog Post
@@ -75,8 +76,10 @@ export default function EditBlog({ blogs, setBlogs, showAlert }) {
             }}
             className="flex flex-col gap-8 items-center"
           >
+            
             <input
               type="text"
+              id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="p-3 rounded-md border border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 w-full"

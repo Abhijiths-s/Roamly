@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         masalva: ["Mansalva", "sans-serif"],
+        roboto:["Roboto","sans-serif"],
       },
     },
   },
