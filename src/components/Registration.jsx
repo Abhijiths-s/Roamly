@@ -30,7 +30,7 @@ export default function Registration({ showAlert }) {
         setSuccess("Registration successful");
         setError("");
         showAlert("Account created successfully", "Success");
-        navigate("/hero");
+        navigate("/dashboard");
       } else {
        
         setError(data.error || "Registration failed.");
