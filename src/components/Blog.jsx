@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ScrollReveal from "./Scrollreveal";
+import axios from "axios";
+import Comment from "./Comment";
+import BlogCard from "./BlogCard"; // new component
 
 export default function Blog() {
   const [blogs, setBlogs] = useState([]);
@@ -7,7 +10,8 @@ export default function Blog() {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const apiUrl =
+        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       try {
         const response = await fetch(`${apiUrl}/blogs/`);
         if (response.ok) {
@@ -21,7 +25,7 @@ export default function Blog() {
       }
     };
 
-    fetchBlogs(); // Fetch blogs on component mount
+    fetchBlogs();
   }, []);
 
   const formatDate = (date) => {
@@ -30,8 +34,20 @@ export default function Blog() {
     return blogDate.toLocaleDateString("en-US", options); // "November 8"
   };
 
+  const handleLike = async (blogId, setLiked, setLikes) => {
+    const res = await axios.post(
+      `http://localhost:5000/api/blogs/${blogId}/like`,
+      {},
+      { headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }}
+    );
+    setLikes(res.data.likes);
+    setLiked(res.data.liked);
+  };
+
   const handleReadMore = (blogId) => {
-    setExpandedBlog(expandedBlog === blogId ? null : blogId); //
+    setExpandedBlog(expandedBlog === blogId ? null : blogId);
   };
 
   return (
@@ -47,50 +63,17 @@ export default function Blog() {
         </div>
 
         {/* Blog Posts */}
-        <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 gap-x-20 lg:gap-y-24 ">
+        <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 gap-x-20 lg:gap-y-24">
           {blogs.length > 0 ? (
             blogs.map((blog) => (
-              <ScrollReveal delay={0.5} y={80}>
-                <div
-                  key={blog._id}
-                  className="flex flex-col bg-black border-2  p-8 shadow-md rounded-xl"
-                >
-                  <div className="overflow-hidden rounded-lg shadow-lg">
-                    <img
-                      src={`http://localhost:5000/uploads/${blog.image}`}
-                      alt="Article cover"
-                      className="object-cover object-center w-full h-72 hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="mt-10">
-                    <h3 className="md:text-3xl text-2xl font-bold tracking-tight text-white hover:scale-105 transition-all duration-300">
-                      {blog.title}
-                    </h3>
-                    <p
-                      className={`mt-3 md:text-lg text-md text-gray-200 font-sans 
-                      ${expandedBlog === blog._id ? "" : "line-clamp-6"}`}
-                    >
-                      {blog.content}
-                    </p>
-                    <button
-                      className="text-blue-500 mt-2"
-                      onClick={() => handleReadMore(blog._id)}
-                    >
-                      {expandedBlog === blog._id ? "Read Less" : "Read More"}
-                    </button>
-                    <div className="mt-6 flex items-center">
-                      <div className="ml-2">
-                        <h4 className="text-lg font-bold text-gray-100">
-                          {blog.author.username}
-                        </h4>
-                        <p className="text-gray-300">
-                          {/* Display the formatted date */}
-                          {formatDate(blog.createdAt)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <ScrollReveal key={blog._id} delay={0.5} y={80}>
+                <BlogCard
+                  blog={blog}
+                  expandedBlog={expandedBlog}
+                  handleLike={handleLike}
+                  handleReadMore={handleReadMore}
+                  formatDate={formatDate}
+                />
               </ScrollReveal>
             ))
           ) : (

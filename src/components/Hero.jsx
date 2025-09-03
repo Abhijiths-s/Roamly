@@ -4,6 +4,7 @@ import "../styles/Animation.css"; // Include your animation styles
 import { Link } from "react-router-dom";
 
 import Navbar from "./Navbar";
+import {Plus} from "lucide-react";
 
 export default function Hero() {
  
@@ -38,8 +39,10 @@ export default function Hero() {
             </span>
             .
           </p>
-          <button className=" bg-blue-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md animate-bounce hover:shadow-lg ">
-            <Link to="/create">Start your journey</Link>
+          <button className=" bg-blue-500 backdrop-blur-md text-white py-3 px-4 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md animate-bounce hover:shadow-lg ">
+            <Link to="/create">
+              <Plus className="inline-block w-6 h-6 mr-2 mb-1" />
+            Start your journey</Link>
           </button>
           {/* <button className="mt-6 bg-blue-500 backdrop-blur-md text-white py-3 px-6 rounded-lg hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg z-10 animate-bounce md:hidden block">
             <Link to="/create">Start Your Journey</Link>

@@ -24,14 +24,16 @@ export default function Registration({ showAlert }) {
         body: JSON.stringify({ username, email, password }), // Using 'username'
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setSuccess("Registration successful");
         setError("");
         showAlert("Account created successfully", "Success");
-        navigate("/login");
+        navigate("/hero");
       } else {
-        const err = await response.json();
-        setError(err.message || "Registration failed.");
+       
+        setError(data.error || "Registration failed.");
       }
     } catch (error) {
       console.error("Error registering:", error);
