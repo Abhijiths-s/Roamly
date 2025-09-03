@@ -13,7 +13,7 @@ export default function Registration({ showAlert }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
 
     try {
       const response = await fetch(`${apiUrl}/auth/register`, {

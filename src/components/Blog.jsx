@@ -11,7 +11,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       const apiUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
       try {
         const response = await fetch(`${apiUrl}/blogs/`);
         if (response.ok) {
@@ -36,7 +36,7 @@ export default function Blog() {
 
   const handleLike = async (blogId, setLiked, setLikes) => {
     const res = await axios.post(
-      `http://localhost:5000/api/blogs/${blogId}/like`,
+      `https://roamly-server.onrender.com/api/blogs/${blogId}/like`,
       {},
       { headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`

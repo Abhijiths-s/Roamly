@@ -16,7 +16,7 @@ const BlogCard = ({
     <div className="flex flex-col bg-black border-2 p-8 shadow-md rounded-xl">
       <div className="overflow-hidden rounded-lg shadow-lg">
         <img
-          src={`http://localhost:5000/uploads/${blog.image}`}
+          src={`https://roamly-server.onrender.com/uploads/${blog.image}`}
           alt="Article cover"
           className="object-cover object-center w-full h-72 hover:scale-105 transition-transform duration-300"
         />

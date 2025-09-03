@@ -18,7 +18,7 @@ export default function EditBlog({ blogs, setBlogs, showAlert }) {
 
   const handleUpdateBlog = async () => {
     const updatedData = { title, content };
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`${apiUrl}/blogs/${id}`, {

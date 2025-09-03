@@ -12,7 +12,7 @@ const Login = ({ showAlert }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
     console.log("API URL:", apiUrl);
     setError(""); // Clear previous error
     setSuccess(""); // Clear previous success message

@@ -6,7 +6,7 @@ const Comment = ({ blogId }) => {
   const [text, setText] = useState("");
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blogs/${blogId}/comments`)
+      .get(`https://roamly-server.onrender.com/api/blogs/${blogId}/comments`)
       .then((response) => setComments(response.data))
       .catch((error) => console.error("Error fetching comments:", error));
   }, [blogId]);
@@ -15,7 +15,7 @@ const Comment = ({ blogId }) => {
     if (!text.trim()) return; // Prevent empty comments
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/blogs/${blogId}/comment`,
+        `https://roamly-server.onrender.com/api/blogs/${blogId}/comment`,
         { text },
         { 
             headers: {

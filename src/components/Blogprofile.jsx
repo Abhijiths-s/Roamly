@@ -9,7 +9,7 @@ const BlogProfilePage = ({ showAlert }) => {
   // Fetch blogs created by the logged-in user
   useEffect(() => {
     const fetchUserBlogs = async () => {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
       try {
         const token = localStorage.getItem("token");
          // Get token from localStorage or any storage method you use
@@ -50,7 +50,7 @@ const BlogProfilePage = ({ showAlert }) => {
 
   // Handle delete blog
   const handleDeleteBlog = async (id) => {
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`${apiUrl}/blogs/${id}`, {
@@ -126,7 +126,7 @@ const BlogProfilePage = ({ showAlert }) => {
                 <div className="my-10">
                   {blog.image && (
                     <img
-                      src={`http://localhost:5000/uploads/${blog.image}`} // Assuming the blog's image URL is stored in the 'image' field
+                      src={`https://roamly-server.onrender.com/uploads/${blog.image}`} // Assuming the blog's image URL is stored in the 'image' field
                       alt={blog.title}
                       className="w-full  object-cover rounded-md mb-4"
                     />
