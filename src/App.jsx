@@ -24,7 +24,7 @@ export default function App() {
 
   // Function to fetch all blogs
   const fetchBlogs = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server-ten.vercel.app/api";
+    const apiUrl = import.meta.env.VITE_API_URL || "https://roamly-server.onrender.com/api";
     try {
       const response = await fetch(`${apiUrl}/blogs`);
       if (response.ok) {
